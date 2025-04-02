@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Coin Toss</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #results {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Virtual Coin Toss</h2>
+    <label>Enter Number of Flips:</label>
+    <input type="number" id="num_flips" min="1" value="1">
+    <button onclick="flipCoin()">Flip Coin</button>
+    
+    <h3>Results:</h3>
+    <div id="results"></div>
+
+    <script>
+        function flipCoin() {
+            let numFlips = document.getElementById("num_flips").value;
+            let results = [];
+            let headsCount = 0;
+            let tailsCount = 0;
+
+            for (let i = 0; i < numFlips; i++) {
+                let result = Math.random() < 0.5 ? "Heads" : "Tails";
+                results.push(result);
+                if (result === "Heads") headsCount++;
+                else tailsCount++;
+            }
+
+            let headsPercentage = ((headsCount / numFlips) * 100).toFixed(2);
+            let tailsPercentage = ((tailsCount / numFlips) * 100).toFixed(2);
+
+            document.getElementById("results").innerHTML = `
+                <p>${results.join(", ")}</p>
+                <p>Heads: ${headsCount} (${headsPercentage}%)</p>
+                <p>Tails: ${tailsCount} (${tailsPercentage}%)</p>
+            `;
+        }
+    </script>
+</body>
+</html>
